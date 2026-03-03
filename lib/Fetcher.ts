@@ -17,6 +17,10 @@ type TFetcherParams<TData = unknown, TBody = unknown> = {
   url?: string | undefined | null;
   auth?: boolean;
   serverAction?: boolean; // for server action
+  isr?: {
+    active?: boolean;
+    revalidate?: number;
+  };
 };
 
 /**
@@ -37,6 +41,10 @@ export const Fetcher = async <TData = unknown, TBody = unknown>(
       url,
       auth = true,
       serverAction = false,
+      isr = {
+        active: false,
+        revalidate: 60,
+      },
     } = params;
 
     const token = Cookies.get("token"); // cookies name
@@ -58,6 +66,11 @@ export const Fetcher = async <TData = unknown, TBody = unknown>(
         link: link as string,
         ...(auth && { Authorization: token }),
       },
+      ...(isr?.active && {
+        next: {
+          revalidate: isr.revalidate,
+        },
+      }),
     };
 
     const res = await fetch(urlString, opts);
