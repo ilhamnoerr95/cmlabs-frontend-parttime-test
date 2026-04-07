@@ -8,7 +8,7 @@ import { useMemo, useState } from "react";
 
 // components
 import { Button, InputCustom } from "@/components/atom";
-import { Shimmer } from "@/components/moleclues";
+import { Breadcrumb, Shimmer } from "@/components/moleclues";
 const FoodCard = dynamic(() => import("@/components/moleclues/FoodCard"), { ssr: false });
 
 const DetailPage = ({ title }: { title: string }) => {
@@ -43,6 +43,10 @@ const DetailPage = ({ title }: { title: string }) => {
 
   return (
     <>
+      <Breadcrumb
+        className="mb-10"
+        items={[{ label: "Home", href: "/" }, { label: "Foods" }, { label: title }]}
+      />
       <h1 className="text-2xl font-bold text-left mb-10">{title}</h1>
       <InputCustom
         value={search}
@@ -71,9 +75,10 @@ const DetailPage = ({ title }: { title: string }) => {
                 key={d.idMeal}
                 image={d.strMealThumb}
                 title={d.strMeal}
-                // onClick={() => {
-                //   router.push(`ingredients-detail/${d.strIngredient}`);
-                // }}
+                onClick={() => {
+                  router.push(`/meals-detail/${d.idMeal}`);
+                }}
+                className="h-40 sm:h-44 md:h-48 lg:h-52"
               />
             ))}
       </div>
