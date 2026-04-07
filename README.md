@@ -191,6 +191,16 @@ clsx("text-sm", isActive && "text-blue-500");
 │   │   ├── page.tsx
 │   │   └── user-client.tsx
 │   │
+│   ├── ingredients-detail      # ingredient page detail
+│   │   └── [slug]
+│   │       └── page.ts         # Dynamic page ingredient-detail
+│   │       └── DetailPage.ts   # component page ingredient-detail
+│   │
+│   ├── meals-detail            # meals page detail
+│   │   └── [slug]
+│   │       └── page.ts         # Dynamic page meals-detail
+│   │       └── DetailPage.ts   # component page meals-detail
+│   │
 │   ├── ex-login                # Example login page
 │   │   └── page.tsx
 │   │
