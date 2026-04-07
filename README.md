@@ -267,6 +267,14 @@ clsx("text-sm", isActive && "text-blue-500");
 npm run install
 ```
 
+### Add env
+
+```
+NEXT_PUBLIC_API_LINK_BE_V1=https://themealdb.com/api/json/v1/1
+API_URL_INTERNAL=http://localhost:3000/
+NEXT_PUBLIC_ORIGIN=http://localhost:3000/
+```
+
 ### Run Development server
 
 ```shell
