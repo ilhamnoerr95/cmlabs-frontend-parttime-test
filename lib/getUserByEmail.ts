@@ -8,7 +8,7 @@ export type User = {
 
 export async function getUserByEmail({ queryKey }: QueryFunctionContext): Promise<User | null> {
   const [, email] = queryKey as [string, string];
-  console.log(queryKey);
+
   const res = await fetch(`http://localhost:3000/api/user?email=${email}`, {
     cache: "no-store", // penting untuk SSR
   });

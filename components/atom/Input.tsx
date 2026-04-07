@@ -1,5 +1,5 @@
-import React from "react";
 import clsx from "clsx";
+import React from "react";
 
 interface IProps {
   placeholder?: string;
@@ -13,7 +13,7 @@ interface IProps {
   className?: string;
 }
 
-const InputCustom: React.FC<IProps> = ({
+export const InputCustom: React.FC<IProps> = ({
   id,
   ariaLabel,
   label,

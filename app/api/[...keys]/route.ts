@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
 import { HEADERS } from "@/utils/header";
 import { cookies } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
 
 const BE_URL: any = {
-  v1: process.env.NEXT_PUBLIC_API_LINK_BE,
+  v1: process.env.NEXT_PUBLIC_API_LINK_BE_V1,
   mocking: "www.tester.com",
   // default: process.env.NEXT_PUBLIC_ORIGIN,
 };
@@ -14,11 +14,11 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ keys
     const token = cookie.get("token")?.value;
     const auth = req.headers.get("auth");
     const link = req.headers.get("link") as string;
-
     const { keys } = (await params) ?? [];
     const pathParams = "/" + keys?.join("/");
     const query = req.nextUrl.searchParams.toString();
     const pathWQuery = query ? `${pathParams}?${query}` : pathParams;
+
     if (!link) {
       return NextResponse.json({
         message: "Handled locally",
@@ -144,7 +144,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ key
     const apiRes = await fetch(url, options);
 
     const result = await apiRes.json();
-    console.log(url, result, "data", data);
 
     if (!apiRes.ok) {
       console.log("not oke?", result?.error?.data);
