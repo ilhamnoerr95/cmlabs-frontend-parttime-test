@@ -18,15 +18,10 @@ export const FoodCard = ({ title, image, className, onClick, size }: IFoodCard) 
         "h-20 sm:h-24 md:h-28 lg:h-32",
         className
       )}
+      onClick={onClick}
     >
       {/* image */}
-      <Image
-        src={image}
-        alt={title}
-        fill
-        className="object-cover object-center"
-        onClick={onClick}
-      />
+      <Image src={image} alt={title} fill className="object-cover object-center" />
 
       {/* overlay */}
       <div className="absolute inset-0 bg-black/30" />

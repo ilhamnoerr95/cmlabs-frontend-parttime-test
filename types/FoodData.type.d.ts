@@ -5,3 +5,9 @@ export interface IPData {
   strThumb: string;
   strType: string | null;
 }
+
+export interface IPDataDetail {
+  strMeal: string;
+  strMealThumb: string;
+  idMeal: string;
+}

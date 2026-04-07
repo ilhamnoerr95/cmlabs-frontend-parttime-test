@@ -1,6 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 
+// components
 import { Button } from "@/components/atom";
 import InputCustom from "@/components/atom/Input";
 import Shimmer from "@/components/moleclues/Shimmer";
@@ -8,11 +9,13 @@ const FoodCard = dynamic(() => import("@/components/moleclues/FoodCard"), { ssr:
 
 import { useHookQuery } from "@/hook/useHookQuery";
 import type { IPData } from "@/types/FoodData.type";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
 export default function Home() {
   const [search, setSearch] = useState<string>("");
   const [visible, setVisible] = useState<number>(20);
+  const router = useRouter();
 
   /**
    * query as key for fetching, that have 3 val
@@ -40,7 +43,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-zinc-50 font-sans text-black py-10">
       <div className="max-w-7xl mx-auto px-4">
-        <h1 className="text-2xl font-bold text-center mb-34">See All The Delicious Foods</h1>
+        <h1 className="text-4xl font-bold text-center mb-29">See All The Delicious Foods</h1>
         <InputCustom
           value={search}
           onChange={(e) => {
@@ -65,7 +68,14 @@ export default function Home() {
           {isLoading
             ? Array?.from({ length: 20 }).map((_, i) => <Shimmer key={i} />)
             : visibleData.map((d) => (
-                <FoodCard key={d.idIngredient} image={d.strThumb} title={d.strIngredient} />
+                <FoodCard
+                  key={d.idIngredient}
+                  image={d.strThumb}
+                  title={d.strIngredient}
+                  onClick={() => {
+                    router.push(`ingredients-detail/${d.strIngredient}`);
+                  }}
+                />
               ))}
         </div>
         {visible < filteredData.length && (
